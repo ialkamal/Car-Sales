@@ -22,12 +22,7 @@ export function carReducer(state = initialState, action) {
       return {
         car: {
           ...state.car,
-          features: [
-            ...state.car.features,
-            ...state.additionalFeatures.filter((additionalFeature) => {
-              return additionalFeature.id === action.payload.id;
-            }),
-          ],
+          features: [...state.car.features, action.payload],
         },
         additionalFeatures: state.additionalFeatures.filter(
           (additionalFeature) => {
@@ -39,12 +34,7 @@ export function carReducer(state = initialState, action) {
     case "REMOVE_FEATURE":
       console.log("REDUCER REMOVE: ", action);
       return {
-        additionalFeatures: [
-          ...state.additionalFeatures,
-          ...state.car.features.filter((feature) => {
-            return feature.id === action.payload.id;
-          }),
-        ],
+        additionalFeatures: [...state.additionalFeatures, action.payload],
         car: {
           ...state.car,
           features: state.car.features.filter((feature) => {
